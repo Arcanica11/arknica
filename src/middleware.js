@@ -6,7 +6,7 @@ import createIntlMiddleware from 'next-intl/middleware';
 // --- CONFIGURACIÓN ---
 const locales = ['en', 'es'];
 const defaultLocale = 'es';
-const publicPages = ['/', '/login'];
+const publicPages = ['/', '/login']; // Rutas base, el middleware las localizará.
 
 const intlMiddleware = createIntlMiddleware({
   locales,
@@ -15,48 +15,47 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 export async function middleware(req) {
-  const { pathname } = req.nextUrl;
+  // 1. Primero, delegamos el manejo de la ruta y el locale a next-intl.
+  const res = intlMiddleware(req);
 
-  // Lógica de Supabase: Crea un cliente para manejar la sesión
-  const res = NextResponse.next();
+  // El pathname ya estará localizado (ej. /es/login) por el middleware anterior.
+  const pathname = req.nextUrl.pathname;
+  const locale = req.nextUrl.locale || defaultLocale;
+
+  // 2. Creamos el cliente de Supabase.
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        get(name) {
-          return req.cookies.get(name)?.value;
-        },
-        set(name, value, options) {
-          res.cookies.set({ name, value, ...options });
-        },
-        remove(name, options) {
-          res.cookies.set({ name, value: '', ...options });
-        },
+        get(name) { return req.cookies.get(name)?.value; },
+        set(name, value, options) { res.cookies.set({ name, value, ...options }); },
+        remove(name, options) { res.cookies.set({ name, value: '', ...options }); },
       },
     }
   );
 
+  // 3. Obtenemos la sesión del usuario.
   const { data: { session } } = await supabase.auth.getSession();
 
-  const isProtectedRoute = !publicPages.some(page => pathname.includes(page));
+  // 4. Lógica de protección de rutas.
+  const isPublicPage = publicPages.some(page => {
+    const localizedPath = `/${locale}${page === '/' ? '' : page}`;
+    return pathname === localizedPath || (page === '/' && pathname === `/${locale}`);
+  });
 
-  // Si hay sesión y la ruta es pública, redirige al dashboard.
-  if (session && !isProtectedRoute) {
-    const dashboardUrl = req.nextUrl.clone();
-    dashboardUrl.pathname = `/es/dashboard`; // Redirección explícita a la ruta protegida
-    return NextResponse.redirect(dashboardUrl);
+  // Si es una ruta protegida (no pública) y no hay sesión, redirigir al login.
+  if (!isPublicPage && !session) {
+    return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
   }
 
-  // Si no hay sesión y la ruta es privada, redirige al login.
-  if (!session && isProtectedRoute) {
-    const loginUrl = req.nextUrl.clone();
-    loginUrl.pathname = `/es/login`;
-    return NextResponse.redirect(loginUrl);
+  // Si hay sesión y el usuario está en una página pública, redirigir a un dashboard (ejemplo).
+  if (session && isPublicPage) {
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
   }
 
-  // Si todo está bien, simplemente pasa el control al siguiente middleware (intlMiddleware).
-  return intlMiddleware(req);
+  // 5. Si todo está en orden, devolvemos la respuesta.
+  return res;
 }
 
 export const config = {

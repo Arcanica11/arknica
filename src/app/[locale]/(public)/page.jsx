@@ -1,5 +1,6 @@
 // src/app/[locale]/(public)/page.jsx
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
 export default function LandingPage() {
@@ -10,7 +11,11 @@ export default function LandingPage() {
         La plantilla base se ha configurado correctamente.
       </p>
       <div className="mt-8">
-        <Button>Ver el Dashboard</Button>
+        <Link href="/dashboard" passHref legacyBehavior>
+          <Button asChild>
+            <a>Ver el Dashboard</a>
+          </Button>
+        </Link>
       </div>
     </main>
   );
