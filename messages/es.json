@@ -1,0 +1,47 @@
+{
+  "common": {
+    "metadata": {
+    "title": "Arknica Tec",
+    "description": "Arknica es tu socio estratégico para el desarrollo digital. Creamos software, apps y páginas web a medida para marcas y proyectos propios. Expertos en diseño, desarrollo y gestión de proyectos. ¡Hablemos de tu próximo proyecto!"
+  },
+  "navbar":{
+    "home": "Inicio",
+    "services": "Servicios",
+    "contactUs": " Contactanos",
+    "login": "Ingreso"
+  },
+  "hero":{  
+    "title": "Convertimos tus ideas en soluciones digitales.",
+    "subtitle": "Construimos software, apps, y páginas web que impulsan negocios. De la idea al lanzamiento, estamos contigo en cada paso.",
+    "button": "Analicemos tu idea"
+  },
+  "login": {
+    "title": "Iniciar Sesión en Arknica CRM",
+    "usernameLabel": "Usuario (Nickname)",
+    "usernameRequired": "El usuario es obligatorio",
+    "passwordLabel": "Contraseña",
+    "passwordRequired": "La contraseña es obligatoria",
+    "submitButton": "Ingresar",
+    "invalidCredentialsError": "Usuario o contraseña incorrectos.",
+    "genericError": "Ha ocurrido un error. Inténtalo de nuevo."
+  }
+  },
+  "services": {
+    "hero": {
+      "title": "Nuestros Servicios",
+      "subtitle": "Soluciones digitales que impulsan tu negocio."
+    },
+    "card1": {
+      "title": "Desarrollo Web y Apps",
+      "description": "Creamos páginas web, tiendas online y aplicaciones móviles personalizadas, optimizadas para rendimiento y escalabilidad."
+    },
+    "card2": {
+      "title": "Estrategia y Consultoría",
+      "description": "Te ayudamos a definir la mejor estrategia digital, desde la planificación inicial hasta el lanzamiento y el crecimiento de tu proyecto."
+    },
+    "card3": {
+      "title": "Diseño UX/UI",
+      "description": "Diseñamos interfaces de usuario intuitivas y atractivas para garantizar una experiencia excepcional para tus clientes."
+    }
+  }
+}

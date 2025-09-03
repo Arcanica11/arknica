@@ -90,10 +90,10 @@ Este es el checklist de tareas para completar el templete.
 
 ### Sub-Fase 1.1: Sistema de Diseño (UI Kit - Átomos) 🎨
 
-  * [✅] `Button` (Botón) - ✅ **En progreso**
-  * [ ] `Input` (Campo de texto)
-  * [ ] `Label` (Etiqueta para formularios)
-  * [ ] `Card` (Tarjeta contenedora)
+  * [✅] `Button` (Botón) 
+  * [✅] `Button` (Botón)
+  * [✅] `Input` (Campo de texto)
+  * [✅] `Label` (Etiqueta para formularios)
   * [ ] `Select` (Menú desplegable)
   * [ ] `Dialog` (Ventana modal)
   * [ ] `Badge` (Insignia)
