@@ -21,6 +21,7 @@
   --color-error: 220 53 69;
 }
 
+/* === Paleta de Colores - Modo Oscuro === */
 @media (prefers-color-scheme: dark) {
   @theme {
     --color-background: 10 10 10;             /* #0A0A0A */
@@ -35,8 +36,6 @@
     --color-input: 43 43 43;               /* #2B2B2B */
     --color-ring: 0 127 255;               /* #007FFF */
     --color-muted-foreground: 179 179 179;  /* #B3B3B3 */
-    --color-accent: 27 27 27; /* Using secondary as a sensible default */
-    --color-accent-foreground: 249 250 251; /* Using secondary-foreground as a sensible default */
   }
 }
 
