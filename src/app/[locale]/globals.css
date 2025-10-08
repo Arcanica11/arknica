@@ -21,22 +21,22 @@
   --color-error: 220 53 69;
 }
 
-/* === Paleta de Colores - Modo Oscuro === */
 @media (prefers-color-scheme: dark) {
   @theme {
-    --color-primary: 0 163 255;
-    --color-primary-foreground: 255 255 255;
-    --color-secondary: 55 65 81;
+    --color-background: 10 10 10;             /* #0A0A0A */
+    --color-foreground: 237 237 237;       /* #EDEDED */
+    --color-primary: 0 127 255;            /* #007FFF */
+    --color-primary-foreground: 255 255 255; /* #FFFFFF */
+    --color-secondary: 27 27 27;           /* #1B1B1B */
     --color-secondary-foreground: 249 250 251;
-    --color-background: 10 10 10;
-    --color-foreground: 237 237 237;
-    --color-accent: 55 65 81;
-    --color-accent-foreground: 249 250 251;
     --color-destructive: 220 53 69;
     --color-destructive-foreground: 255 255 255;
-    --color-border: 55 65 81;
-    --color-input: 55 65 81;
-    --color-ring: 0 163 255;
+    --color-border: 43 43 43;              /* #2B2B2B */
+    --color-input: 43 43 43;               /* #2B2B2B */
+    --color-ring: 0 127 255;               /* #007FFF */
+    --color-muted-foreground: 179 179 179;  /* #B3B3B3 */
+    --color-accent: 27 27 27; /* Using secondary as a sensible default */
+    --color-accent-foreground: 249 250 251; /* Using secondary-foreground as a sensible default */
   }
 }
 
