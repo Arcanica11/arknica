@@ -7,6 +7,7 @@
   "navbar": {
     "home": "Home",
     "services": "Services",
+    "about": "About Us",
     "contactUs": " Contact Us",
     "login": "Login"
   },
