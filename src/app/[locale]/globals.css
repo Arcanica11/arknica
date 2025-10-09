@@ -35,9 +35,9 @@
     --color-border: 43 43 43;              /* #2B2B2B */
     --color-input: 43 43 43;               /* #2B2B2B */
     --color-ring: 0 127 255;               /* #007FFF */
-    --color-muted: 27 27 27;           /* #1B1B1B */
+    --color-muted: 27 27 27;
     --color-muted-foreground: 179 179 179;  /* #B3B3B3 */
-    --color-accent: 27 27 27;           /* #1B1B1B */
+    --color-accent: 27 27 27;
     --color-accent-foreground: 249 250 251;
   }
 }
