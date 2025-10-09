@@ -23,7 +23,6 @@
   --color-error: 220 53 69;
 }
 
-/* === Paleta de Colores - Modo Oscuro === */
 @media (prefers-color-scheme: dark) {
   @theme {
     --color-background: 10 10 10;             /* #0A0A0A */
