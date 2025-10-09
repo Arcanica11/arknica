@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/Button'
 
 export default function PublicHeader() {
   const t = useTranslations('common.navbar')

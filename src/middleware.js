@@ -39,9 +39,17 @@ export async function middleware(req) {
   const { data: { session } } = await supabase.auth.getSession();
 
   // 4. Lógica de protección de rutas.
-  const isPublicPage = publicPages.some(page => {
-    const localizedPath = `/${locale}${page === '/' ? '' : page}`;
-    return pathname === localizedPath || (page === '/' && pathname === `/${locale}`);
+  // This logic correctly handles the "as-needed" locale prefix strategy.
+  const isPublicPage = publicPages.some(p => {
+    // If the locale is the default, the path won't be prefixed.
+    if (locale === defaultLocale) {
+      // This handles both '/' and '/login' for the default locale.
+      return pathname === p;
+    }
+    // For other locales, the path will be prefixed.
+    // We also need to handle the root case (e.g., '/en' for '/').
+    const localizedPath = `/${locale}${p === '/' ? '' : p}`;
+    return pathname === localizedPath;
   });
 
   // Si es una ruta protegida (no pública) y no hay sesión, redirigir al login.
@@ -49,8 +57,9 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
   }
 
-  // Si hay sesión y el usuario está en una página pública, redirigir a un dashboard (ejemplo).
-  if (session && isPublicPage) {
+  // If a session exists and the user is trying to access the login page, redirect to the dashboard.
+  const isLoginPage = pathname === `/${locale}/login` || (pathname === '/login' && locale === defaultLocale);
+  if (session && isLoginPage) {
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
   }
 

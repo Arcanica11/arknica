@@ -2,16 +2,16 @@
 import "./globals.css";
 import "@fontsource/inter";
 import {NextIntlClientProvider} from 'next-intl';
-import {getRequestConfig} from 'next-intl/server';
- 
+import { getMessages } from 'next-intl/server';
+
 export const metadata = {
   title: "Arknica Core",
   description: "Plantilla de aplicación para proyectos Arknica",
 };
- 
-export default async function RootLayout({children, params: {locale}}) {
-  const {messages} = await getRequestConfig({locale});
- 
+
+export default async function RootLayout({ children, params: { locale } }) {
+  const messages = await getMessages();
+
   return (
     <html lang={locale}>
       <head>
