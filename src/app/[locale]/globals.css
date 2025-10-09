@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* === Paleta de Colores - Modo Claro por Defecto === */
 @theme {
@@ -45,5 +47,4 @@
 body {
   background: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
-  font-family: Arial, Helvetica, sans-serif;
 }

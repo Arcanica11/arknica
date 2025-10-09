@@ -1,4 +1,4 @@
-// src/app/[locale]/layout.js
+// src/app/[locale]/layout.jsx
 import "./globals.css";
 import "@fontsource/inter";
 import {NextIntlClientProvider} from 'next-intl';

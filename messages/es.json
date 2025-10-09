@@ -24,6 +24,11 @@
     "submitButton": "Ingresar",
     "invalidCredentialsError": "Usuario o contraseña incorrectos.",
     "genericError": "Ha ocurrido un error. Inténtalo de nuevo."
+  },
+  "landing": {
+    "title": "Bienvenido a Arknica Core",
+    "subtitle": "La plantilla base se ha configurado correctamente.",
+    "button": "Ver el Dashboard"
   }
   },
   "services": {
