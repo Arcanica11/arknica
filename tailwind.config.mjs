@@ -1,5 +1,4 @@
 // tailwind.config.mjs
-
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
@@ -53,14 +52,18 @@ module.exports = {
         display: ['Clash Display', 'Space Grotesk', ...fontFamily.sans],
       },
       fontSize: {
-        'h1': ['6rem', { lineHeight: '1.1', fontWeight: '600' }], // 96px
-        'h2': ['4rem', { lineHeight: '1.2', fontWeight: '500' }], // 64px
-        'h3': ['2.5rem', { lineHeight: '1.3', fontWeight: '500' }], // 40px
-        'p': ['1.125rem', { lineHeight: '1.6', fontWeight: '400' }], // 18px
-        'button': ['1.125rem', { lineHeight: '1', fontWeight: '600' }], // 18px
+        'h1': ['6rem', { lineHeight: '1.1', fontWeight: '600' }],
+        'h2': ['4rem', { lineHeight: '1.2', fontWeight: '500' }],
+        'h3': ['2.5rem', { lineHeight: '1.3', fontWeight: '500' }],
+        'p': ['1.125rem', { lineHeight: '1.6', fontWeight: '400' }],
+        'button': ['1.125rem', { lineHeight: '1', fontWeight: '600' }],
       },
-      // ... any other extensions like keyframes or borderRadius can go here
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
