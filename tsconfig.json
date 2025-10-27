@@ -1,0 +1,36 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5", // Define la versión de ECMAScript de salida
+    "lib": ["dom", "dom.iterable", "esnext"], // Librerías estándar incluidas
+    "allowJs": true, // Permite que se compilen archivos JavaScript
+    "skipLibCheck": true, // Omite la comprobación de tipos en archivos de declaración
+    "strict": true, // Habilita todas las comprobaciones de tipo estrictas
+    "noEmit": true, // No emite archivos de salida (Next.js se encarga de esto)
+    "esModuleInterop": true, // Permite la interoperabilidad con módulos CommonJS
+    "module": "esnext", // Especifica la generación de módulos
+    "moduleResolution": "bundler", // Usa la estrategia de resolución de módulos moderna
+    "resolveJsonModule": true, // Permite importar archivos .json
+    "isolatedModules": true, // Asegura que cada archivo sea un módulo separado
+    "jsx": "preserve", // ¡Esta es la corrección clave! Le dice a TS que preserve el JSX para que Next.js lo maneje.
+    "incremental": true, // Habilita la compilación incremental
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Configuración de alias de ruta (igual que en jsconfig.json)
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/middleware.js", // Incluye archivos JS/TS específicos si es necesario
+    "i18n.js"
+  ],
+  "exclude": ["node_modules"]
+}
