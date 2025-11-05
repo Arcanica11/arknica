@@ -8,11 +8,12 @@ module.exports = {
   darkMode: ["class"],
   // Archivos donde Tailwind buscará clases para purgar en producción
   content: [
-    './pages/**/*.{js,jsx}', // Rutas de Pages Router (si las hubiera)
-    './components/**/*.{js,jsx}', // Componentes
-    './app/**/*.{js,jsx}', // Rutas de App Router
-    './src/**/*.{js,jsx}', // Incluir todo dentro de src
-  ],
+  './pages/**/*.{js,ts,jsx,tsx,mdx}',
+  './components/**/*.{js,ts,jsx,tsx,mdx}',
+  './app/**/*.{js,ts,jsx,tsx,mdx}',
+  './src/**/*.{js,ts,jsx,tsx,mdx}',
+],
+  
   // Prefijo opcional para las clases de Tailwind (no se usa actualmente)
   prefix: "",
   // Tema base de Tailwind

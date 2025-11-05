@@ -8,9 +8,10 @@ import { useTranslations } from 'next-intl';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/Button'; // Asegúrate que la ruta sea correcta
 
-// Importar los logos
-import logoDark from '/public/logoDarkArk-hrz.png'; // Asumiendo logo horizontal oscuro por defecto 
-import logoLight from '/public/logoClaroArk-hrz.png'; // Asumiendo logo horizontal claro para modo oscuro 
+// --- CORRECCIÓN ---
+// NO importes imágenes de /public. Se referencian directamente por su ruta.
+// import logoDark from '/public/logoDarkArk-hrz.png'; (ELIMINADO)
+// import logoLight from '/public/logoClaroArk-hrz.png'; (ELIMINADO)
 
 export default function PublicHeader() {
   const t = useTranslations('common.navbar');
@@ -28,7 +29,6 @@ export default function PublicHeader() {
           ? 'bg-background/80 backdrop-blur-sm border-b border-border'
           : 'bg-transparent'
       }`}
-      // Animar la opacidad y posición al cargar (opcional)
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -38,26 +38,28 @@ export default function PublicHeader() {
         <Link href="/" className="flex items-center">
           {/* Imagen Oscura (por defecto) */}
           <Image
-            src={logoDark}
+            // --- CORRECCIÓN ---
+            src="/logoDarkArk-hrz.png" // Ruta como string desde la raíz
             alt="Arknica Logo"
-            width={150} // Ajusta el ancho según necesites
-            height={40} // Ajusta la altura proporcionalmente
-            priority // Priorizar carga del logo (importante para LCP)
-            className="dark:hidden" // Ocultar en modo oscuro
+            width={150} 
+            height={40} 
+            priority 
+            className="dark:hidden" 
           />
           {/* Imagen Clara (visible en modo oscuro) */}
           <Image
-            src={logoLight}
+            // --- CORRECCIÓN ---
+            src="/logoClaroArk-hrz.png" // Ruta como string desde la raíz
             alt="Arknica Logo"
-            width={150} // Mismo ancho
-            height={40} // Misma altura
+            width={150} 
+            height={40} 
             priority
-            className="hidden dark:block" // Ocultar en modo claro, mostrar en oscuro
+            className="hidden dark:block" 
           />
         </Link>
 
         {/* Navegación */}
-        <nav className="hidden md:block"> {/* Ocultar en móviles pequeños */}
+        <nav className="hidden md:block"> 
           <ul className="flex items-center gap-6 text-sm font-medium text-foreground/80">
             <li>
               <Link href="/" className="hover:text-primary transition-colors">{t('home')}</Link>
@@ -85,7 +87,7 @@ export default function PublicHeader() {
         <div className="md:hidden">
           <Button variant="ghost" size="icon">
             {/* Aquí iría un icono de menú, ej. <Menu className="h-6 w-6" /> */}
-            <span className="sr-only">Abrir menú</span> {/* Accesibilidad */}
+            <span className="sr-only">Abrir menú</span> 
           </Button>
         </div>
       </div>

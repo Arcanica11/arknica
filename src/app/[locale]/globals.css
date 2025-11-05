@@ -2,48 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === Paleta de Colores - Modo Claro por Defecto === */
-@theme {
+/* === Variables del tema (modo claro) === */
+:root {
   --color-primary: 0 123 255;
   --color-primary-foreground: 255 255 255;
+
   --color-secondary: 243 244 246;
   --color-secondary-foreground: 17 24 39;
+
   --color-background: 255 255 255;
   --color-foreground: 23 23 23;
+
   --color-accent: 243 244 246;
   --color-accent-foreground: 17 24 39;
+
   --color-destructive: 220 53 69;
   --color-destructive-foreground: 255 255 255;
+
   --color-border: 229 231 235;
   --color-input: 229 231 235;
   --color-ring: 0 123 255;
+
   --color-success: 40 167 69;
   --color-info: 23 162 184;
   --color-warning: 255 193 7;
   --color-error: 220 53 69;
+
+  --radius: 0.75rem;
 }
 
+/* === Modo oscuro === */
 @media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: 10 10 10;             /* #0A0A0A */
-    --color-foreground: 237 237 237;       /* #EDEDED */
-    --color-primary: 0 127 255;            /* #007FFF */
-    --color-primary-foreground: 255 255 255; /* #FFFFFF */
-    --color-secondary: 27 27 27;           /* #1B1B1B */
+  :root {
+    --color-background: 10 10 10;
+    --color-foreground: 237 237 237;
+
+    --color-primary: 0 127 255;
+    --color-primary-foreground: 255 255 255;
+
+    --color-secondary: 27 27 27;
     --color-secondary-foreground: 249 250 251;
+
     --color-destructive: 220 53 69;
     --color-destructive-foreground: 255 255 255;
-    --color-border: 43 43 43;              /* #2B2B2B */
-    --color-input: 43 43 43;               /* #2B2B2B */
-    --color-ring: 0 127 255;               /* #007FFF */
+
+    --color-border: 43 43 43;
+    --color-input: 43 43 43;
+    --color-ring: 0 127 255;
+
     --color-muted: 27 27 27;
-    --color-muted-foreground: 179 179 179;  /* #B3B3B3 */
+    --color-muted-foreground: 179 179 179;
+
     --color-accent: 27 27 27;
     --color-accent-foreground: 249 250 251;
   }
 }
 
-body {
+/* === Estilos base === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
+  font-family: var(--font-inter), system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* === Tipografía === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Clash Display', var(--font-inter), sans-serif;
+  color: rgb(var(--color-foreground));
+  margin: 0;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* === Enlaces === */
+a {
+  color: rgb(var(--color-primary));
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* === Botones === */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* === Animaciones suaves === */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }

@@ -1,8 +1,8 @@
 // next.config.mjs
-
 import createWithIntl from 'next-intl/plugin';
 
-const withIntl = createWithIntl('./i18n.js');
+// CORRECCIÓN: Apunta al archivo .ts
+const withIntl = createWithIntl('./i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

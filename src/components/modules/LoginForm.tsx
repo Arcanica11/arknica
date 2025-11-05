@@ -1,73 +1,101 @@
-// src/components/modules/PublicHeader.tsx
+// src/components/modules/LoginForm.tsx
 'use client';
 
-import React, { useState } from 'react'; // Ya estaba importado
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useState, useTransition } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import logoDark from '/public/logoDarkArk-hrz.png';
-import logoLight from '/public/logoClaroArk-hrz.png';
-// Importar icono de menú si se usa
-// import { Menu } from 'lucide-react';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
+import { cn } from '@/lib/utils';
+// NOTA: Aún necesitamos crear 'signInWithPassword' en 'auth-actions.ts'
+// import { signInWithPassword } from '@/app/actions/auth-actions';
 
-export default function PublicHeader() {
-  const t = useTranslations('common.navbar');
-  const { scrollY } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
-  // Añadir estado para menú móvil (si se implementa)
-  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+// Interfaz para el estado de la acción
+interface FormState {
+  success: boolean;
+  message: string;
+}
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 50);
-  });
+// Interfaz de los campos del formulario
+interface IFormInput {
+  username: string; // O 'email' si prefieres
+  password: string;
+}
+
+export default function LoginForm() {
+  const t = useTranslations('common.login');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+
+  const [formState, setFormState] = useState<FormState | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  // Esta función manejará el envío a la futura Server Action
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const formData = new FormData();
+    formData.append('username', data.username);
+    formData.append('password', data.password);
+
+    startTransition(async () => {
+      setFormState(null);
+      
+      // --- ¡ACCIÓN PENDIENTE! ---
+      // Aquí llamaremos a la Server Action cuando esté creada
+      // const result = await signInWithPassword(formData);
+      // setFormState(result);
+
+      // --- Placeholder mientras se crea la acción ---
+      console.log("Enviando formulario...", data);
+      // Simulación de error (puedes quitar esto)
+      setFormState({ success: false, message: t('invalidCredentialsError') });
+      // ------------------------------------------
+    });
+  };
 
   return (
-    <motion.header
-      // ... (código existente es correcto para .tsx)
-    >
-      <div className="container mx-auto flex items-center justify-between h-20 px-4">
-        {/* Logo Link */}
-        <Link href="/" className="flex items-center">
-          <Image src={logoDark} /* ... */ className="dark:hidden" />
-          <Image src={logoLight} /* ... */ className="hidden dark:block" />
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:block">
-          {/* ... (código existente es correcto) */}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            // onClick={() => setMobileMenuOpen(!mobileMenuOpen)} // Lógica para abrir/cerrar menú móvil
-          >
-             {/* <Menu className="h-6 w-6" /> */}
-             <svg // Placeholder Icono Menú
-               xmlns="http://www.w3.org/2000/svg"
-               width="24"
-               height="24"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               strokeWidth="2"
-               strokeLinecap="round"
-               strokeLinejoin="round"
-             >
-               <line x1="4" x2="20" y1="12" y2="12" />
-               <line x1="4" x2="20" y1="6" y2="6" />
-               <line x1="4" x2="20" y1="18" y2="18" />
-             </svg>
-            <span className="sr-only">Abrir menú</span>
-          </Button>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Mensaje de Error del Servidor */}
+      {formState && !formState.success && (
+        <div className="p-3 rounded-md bg-destructive/10 text-destructive text-sm">
+          {formState.message}
         </div>
+      )}
+
+      {/* Campo Usuario */}
+      <div className="space-y-2">
+        <Label htmlFor="username">{t('usernameLabel')}</Label>
+        <Input
+          id="username"
+          {...register('username', { required: t('usernameRequired') })}
+          disabled={isPending}
+        />
+        {errors.username && (
+          <p className="text-destructive text-sm">{errors.username.message}</p>
+        )}
       </div>
-       {/* Aquí iría el menú desplegable móvil si se implementa */}
-       {/* {mobileMenuOpen && ( <MobileNav /> )} */}
-    </motion.header>
+
+      {/* Campo Contraseña */}
+      <div className="space-y-2">
+        <Label htmlFor="password">{t('passwordLabel')}</Label>
+        <Input
+          id="password"
+          type="password"
+          {...register('password', { required: t('passwordRequired') })}
+          disabled={isPending}
+        />
+        {errors.password && (
+          <p className="text-destructive text-sm">{errors.password.message}</p>
+        )}
+      </div>
+
+      {/* Botón de Envío */}
+      <Button type="submit" className="w-full" disabled={isPending}>
+        {isPending ? "Ingresando..." : t('submitButton')}
+      </Button>
+    </form>
   );
 }
